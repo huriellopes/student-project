@@ -16,7 +16,15 @@ class PostsRepository implements PostsRepositoryInterface
      */
     public function listPosts(): Collection
     {
-        return PostsModel::all();
+        return PostsModel::with('author')->get();
+    }
+
+    /**
+     * @return Collection
+     */
+    public function ListaPosts() : Collection
+    {
+        return PostsModel::with('author')->where('active', 1)->get();
     }
 
     /**
@@ -29,7 +37,6 @@ class PostsRepository implements PostsRepositoryInterface
         $posts->title = $params->title;
         $posts->description = $params->description;
         $posts->content = $params->content;
-        $posts->active = $params->active;
         $posts->user_id = Auth::user()->id;
         $posts->save();
 
@@ -49,18 +56,64 @@ class PostsRepository implements PostsRepositoryInterface
 
     /**
      * @param PostsModel $post
+     * @return PostsModel
+     */
+    public function getposts(PostsModel $post): PostsModel
+    {
+        return PostsModel::where('id', $post->id)->first();
+    }
+
+    /**
+     * @param PostsModel $post
+     * @return PostsModel
+     */
+    public function activePost(PostsModel $post) : PostsModel
+    {
+        $Post = $this->getposts($post);
+
+        $Post->fill([
+            'active' => 1
+        ]);
+
+        $Post->save();
+
+        $Post->refresh();
+
+        return $Post;
+    }
+
+    /**
+     * @param PostsModel $post
+     * @return PostsModel
+     */
+    public function inactivePost(PostsModel $post) : PostsModel
+    {
+        $Post = $this->getposts($post);
+
+        $Post->fill([
+            'active' => 0
+        ]);
+
+        $Post->save();
+
+        $Post->refresh();
+
+        return $Post;
+    }
+
+    /**
+     * @param PostsModel $post
      * @param stdClass $params
      * @return PostsModel
      */
     public function updatePost(PostsModel $post, stdClass $params): PostsModel
     {
-        $Post = $this->getPost($post);
+        $Post = $this->getposts($post);
 
         $Post->fill([
             'title' => $params->title,
             'description' => $params->description,
-            'content' => $params->content,
-            'active' => $params->active,
+            'content' => $params->content
         ]);
 
         $Post->save();

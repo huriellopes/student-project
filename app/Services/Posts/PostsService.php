@@ -31,6 +31,14 @@ class PostsService implements PostsServiceInterface
     }
 
     /**
+     * @return Collection
+     */
+    public function ListaPosts() : Collection
+    {
+        return $this->PostsRepositoryInterface->ListaPosts();
+    }
+
+    /**
      * @param stdClass $params
      * @return PostsModel
      * @throws Exception
@@ -49,6 +57,24 @@ class PostsService implements PostsServiceInterface
     public function getPost(PostsModel $post): PostsModel
     {
         return $this->PostsRepositoryInterface->getPost($post);
+    }
+
+    /**
+     * @param PostsModel $post
+     * @return PostsModel
+     */
+    public function activePost(PostsModel $post) : PostsModel
+    {
+        return $this->PostsRepositoryInterface->activePost($post);
+    }
+
+    /**
+     * @param PostsModel $post
+     * @return PostsModel
+     */
+    public function inactivePost(PostsModel $post) : PostsModel
+    {
+        return $this->PostsRepositoryInterface->inactivePost($post);
     }
 
     /**

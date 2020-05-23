@@ -14,6 +14,11 @@ interface PostsServiceInterface
     public function listPosts() : Collection;
 
     /**
+     * @return Collection
+     */
+    public function ListaPosts() : Collection;
+
+    /**
      * @param stdClass $params
      * @return PostsModel
      */
@@ -24,6 +29,18 @@ interface PostsServiceInterface
      * @return PostsModel
      */
     public function getPost(PostsModel $post) : PostsModel;
+
+    /**
+     * @param PostsModel $post
+     * @return PostsModel
+     */
+    public function activePost(PostsModel $post) : PostsModel;
+
+    /**
+     * @param PostsModel $post
+     * @return PostsModel
+     */
+    public function inactivePost(PostsModel $post) : PostsModel;
 
     /**
      * @param PostsModel $post

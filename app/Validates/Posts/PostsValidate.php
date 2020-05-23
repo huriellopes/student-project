@@ -10,8 +10,6 @@ class PostsValidate extends Validate
         'title' => 'required|max:150',
         'description' => 'required|max:150',
         'content' => 'required|max:255',
-        'active' => 'required',
-        'user_id' => 'required',
     ];
 
     protected $messages = [];

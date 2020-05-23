@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Web\Admin;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Posts\PostsServiceInterface;
 use App\Interfaces\Users\UsersServiceInterface;
+use App\Models\PostsModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,5 +49,14 @@ class HomeController extends Controller
     }
 
     public function postCreate(Request $request)
-    {}
+    {
+        return view($this->viewPath.'pages.posts.create');
+    }
+
+    public function showPost(PostsModel $PostsModel)
+    {
+        $post = $this->PostsServiceInterface->getPost($PostsModel);
+
+        return View($this->viewPath.'pages.posts.show', compact('post'));
+    }
 }

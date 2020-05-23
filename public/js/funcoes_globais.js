@@ -13,6 +13,28 @@ const FuncoesGlobais = function () {
         }
     })
 
+    exibirMsg = (title, text = null, type, html = null, timer = false) => {
+        swal({
+            title: title,
+            html: html,
+            text: text,
+            icon: type,
+            confirmButtonText: 'OK',
+            timer: timer
+        })
+    }
+
+    confirmMsg = (title, text = null, type, html = null, confirmText, cancelText) =>
+        swal({
+            title: title,
+            icon: type,
+            text: text,
+            html: html,
+            showCloseButton: true,
+            showCancelButton: true,
+            confirmButtonText: confirmText,
+            cancelButtonText: cancelText,
+        })
 
     configDataTable = (ClassTable) => {
         $('.'+ClassTable).DataTable({
@@ -28,7 +50,7 @@ const FuncoesGlobais = function () {
                 "sInfoFiltered": "(Filtrados de _MAX_ registros)",
                 "sInfoPostFix": "",
                 "sInfoThousands": ".",
-                "sLengthMenu": "_MENU_ resultados por página",
+                "sLengthMenu": "_MENU_ por página",
                 "sLoadingRecords": "Carregando...",
                 "sProcessing": "Processando...",
                 "sZeroRecords": "Nenhum registro encontrado",

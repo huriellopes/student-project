@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Site;
+namespace App\Http\Controllers\Web\Site;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\Posts\PostsServiceInterface;
@@ -23,7 +23,8 @@ class SiteController extends Controller
 
     public function index()
     {
-        $posts = $this->PostsServiceInterface->listPosts();
+        $posts = $this->PostsServiceInterface->ListaPosts();
+
         return view($this->viewPath.'index', compact('posts'));
     }
 }

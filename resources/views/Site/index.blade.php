@@ -6,10 +6,16 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <x-card>
-                @slot('qtdRow', 4)
-                @slot('posts', $posts)
-            </x-card>
+            @if (count($posts) > 0)
+                <x-card>
+                    @slot('qtdRow', 4)
+                    @slot('posts', $posts)
+                </x-card>
+            @else
+                <div class="col-md-12 col-sm-12 text-center">
+                    <span>Nenhum Post Encontrado!</span>
+                </div>
+            @endif
         </div>
     </div>
 @stop
